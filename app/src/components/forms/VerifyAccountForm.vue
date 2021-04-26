@@ -3,21 +3,50 @@
     <vue-otp-2
       length="4"
       join-character="-"
+       @onComplete="chekValidity"
     />
     <!-- submit button -->
     <div class="text-center mt-4 w-100">
-      <button type="submit" class="btn btn-primary btn-block">Verify Account</button>
+      <button type="button" @click="verifyAccount" class="btn btn-primary btn-block">Verify Account</button>
     </div>
   </div>
 </template>
 
-<style scoped>
+<script>
+import Auth from '@/services/auth';
+export default {
+  data() {
+    return {
+      isDisabled: true,
+      verificationCode: ''
+    }
+  },
+  methods: {
+    chekValidity(value) {
+      this.verificationCode = value.join('')
+      console.log(this.verificationCode);
+    },
+    async verifyAccount() {
+      try {
+        console.log('here')
+        // return
+        const { data } = await Auth.ProcessVerifyAccount({verificationCode: this.verificationCode})
+        console.log(data)
+      }catch(error) {
+        console.log*'error'
+      }
+    }
+  }
+}
+</script>
+
+<style>
   .vue-otp-2 {
     display: flex;
     justify-content: space-between;
     width: 100%
   }
-  div {
+  .vue-otp-2 div {
     flex: 1;
     display: flex;
     align-items: center;
@@ -32,7 +61,7 @@
     text-align: center;
   }
 
-  span {
+   .vue-otp-2 div input span {
     display: block;
     flex: 1;
     text-align: center;
