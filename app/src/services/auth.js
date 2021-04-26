@@ -1,22 +1,23 @@
-// import { apiClient } from './apiClient';
-
-export default axios => ({
+import { apiClient } from './apiClient';
+const Auth = {
   // patient routes
   ProcessPatientRegister(payload) {
-    return axios.post("/patients/signup", payload)
+    return apiClient.post("/patients/signup", payload)
   },
   ProcessVerifyAccount(payload) {
-    return axios.post("/patients/verify", payload);
+    return apiClient.post("/patients/verify", payload);
   },
   ProcessPatientLogin(payload) {
-    return axios.post("/patients/verify", payload);
+    return apiClient.post("/patients/verify", payload);
   },
 
   // admin routes
   ProcessAdminLogin(payload) {
-    return axios.post("/admins/login", payload);
+    return apiClient.post("/admins/login", payload);
   },
   ProcessAdminRegister(payload) {
-    return axios.post("/admins/signup", payload);
+    return apiClient.post("/admins/signup", payload);
   },
-})
+}
+
+export default Auth
