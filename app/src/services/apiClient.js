@@ -9,6 +9,8 @@ export const apiClient = axios.create({
   },
 });
 
+apiClient.defaults.headers.common['Authorization'] = localStorage.getItem('token') || null
+
 apiClient.interceptors.request.use((config) => {
   Nprogress.start();
   return config;
